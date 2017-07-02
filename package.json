@@ -1,0 +1,28 @@
+{
+  "name": "clapo-admin",
+  "version": "0.1.0",
+  "description": "Administración Web Oficial de la Cooperativa Ltda de Agua Potable y Otros Servicios publicos de Chillar, Azul, Buenos Aires",
+  "author": "Rodolfo Valguarnera <rod7val@gmail.com> (https://github.com/rody7val/)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rody7val/clapo-admin.git"
+  },
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^4.0.0",
+    "moment": "^2.18.1",
+    "moment-with-locales-es6": "^2.18.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
