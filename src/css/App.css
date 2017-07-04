@@ -1,0 +1,23 @@
+.App {
+  position: relative;
+}
+
+.App-login {
+  margin: 0px;
+  border: 5px solid transparent;
+  font-size: large;
+}
+
+.App-upload {
+  text-align: center;
+  border: 5px solid transparent;
+}
+
+.App-images {
+  text-align: center;
+  border: 5px solid transparent;
+}
+
+.img-user {
+  border-radius: 50%;
+}

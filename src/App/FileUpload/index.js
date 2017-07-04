@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 
 class FileUpload extends Component {
-	constructor () {
-		super();
-		this.state = {
-      key: ""
-    };
-	}
-
 	render () {
 		return (
 			<div>
