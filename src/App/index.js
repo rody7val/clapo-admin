@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import moment from 'moment-with-locales-es6';
+import { BrowserRouter as Router} from 'react-router-dom'
 
 import Header from './Header';
+import Main from './Main';
 import FileUpload from './FileUpload';
 import '../css/App.css';
 
@@ -14,7 +16,8 @@ class App extends Component {
     this.state = {
       user: null,
       uploadValue: 0,
-      pictures: []
+      pictures: [],
+      collapsed: true
     };
 
     // auth
@@ -23,12 +26,20 @@ class App extends Component {
     // files
     this.handleUpload = this.handleUpload.bind(this);
     // debug
-    // this.renderJSON = this.renderJSON.bind(this);
+    this.renderJSON = this.renderJSON.bind(this);
     // user
     this.refresh = this.refresh.bind(this);
     this.setPictures = this.setPictures.bind(this);
     this.resetPictures = this.resetPictures.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this)
 
+  }
+
+  // Menu toggle
+  toggleMenu() {
+    this.setState({
+      collapsed: !this.state.collapsed
+    })
   }
 
   // Actualizar estado react
@@ -108,34 +119,40 @@ class App extends Component {
   }
 
   // Debug
-  // renderJSON () {
-  //   return (
-  //     <pre>
-  //       user = {JSON.stringify(this.state.user, null, 2)}
-  //       <br/>
-  //       <hr/>
-  //       pictures = {JSON.stringify(this.state.pictures, null, 2)}
-  //     </pre>
-  //   )
-  // }
+  renderJSON () {
+    return (
+      <pre>
+        user = {JSON.stringify(this.state.user, null, 2)}
+        <br/>
+        <hr/>
+        pictures = {JSON.stringify(this.state.pictures, null, 2)}
+      </pre>
+    )
+  }
 
   // App
   render() {
+    const { user } = this.props
+
     return (
       <div>
         <div className="App red">
-          <Header
-            user={this.state.user}
-            loginGoogle={this.handleAuth}
-            logout={this.handleLogout}
-            className="App-header" />
+          <Router>
+            <div>
+              <Header
+                user={this.state.user}
+                collapsedMenu={this.toggleMenu}
+                loginGoogle={this.handleAuth}
+                logout={this.handleLogout}
+                className="App-header" />
+
+              <Main user={this.state.user} collapsed={this.state.collapsed} collapsedMenu={this.toggleMenu}/>
+            </div>
+          </Router>
         </div>
       </div>
     );
   }
 }
-        // <div>
-        //   { this.renderJSON() }
-        // </div>
 
 export default App;
