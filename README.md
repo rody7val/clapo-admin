@@ -1,1 +1,14 @@
-Administración Web Oficial de la Cooperativa Ltda de Agua Potable y Otros Servicios publicos de Chillar, Azul, Buenos Aires
+# (clapo-admin) Administración web
+
+Requisitos:
+
+ * [Node.js](https://nodejs.org/)
+
+Instalación:
+
+```
+git clone https://github.com/rody7val/clapo-admin
+cd clapo-admin
+npm install
+npm start
+```
