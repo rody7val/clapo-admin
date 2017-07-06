@@ -46,17 +46,16 @@ class Header extends React.Component {
 
 						{ user ? (
 							<button
-								id='collapse-brand'
 								type='button'
 								onClick={collapsedMenu}
-								className='navbar-toggler navbar-toggler-left'
+								className='collapse-brand navbar-toggler navbar-toggler-left'
 								data-toggle="toggle"
 								data-target="#content-menu">
 								<span className='navbar-toggler-icon'></span>
 							</button>
 						) : '' }
 
-						<Link to='/'>
+						<Link to='/' className='title-link'>
 							<h4 className='title'>
 								<img src={title} alt='title.svg' />
 							</h4>
@@ -74,9 +73,9 @@ class Header extends React.Component {
 									<DropdownItem className='link-dropdown'>
 										<Link to={'/mi'}>Mi perfil</Link>
 									</DropdownItem>
-									<DropdownItem>Ayuda</DropdownItem>
+									<DropdownItem disabled>Ayuda</DropdownItem>
 									<DropdownItem divider/>
-									<DropdownItem>Configuración</DropdownItem>
+									<DropdownItem disabled>Configuración</DropdownItem>
 									<DropdownItem onClick={this.props.logout}>Salir</DropdownItem>
 								</DropdownMenu>
 							</Dropdown>

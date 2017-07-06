@@ -12,7 +12,7 @@ import Menu from '../Menu'
 class Main extends React.Component {
 
 	render() {
-		const { user, collapsed, collapsedMenu } = this.props
+		const { user, collapsed, collapsedMenu, resize } = this.props
 
 		const Mi = () => (
 			<div>
@@ -54,7 +54,7 @@ class Main extends React.Component {
 								<Col xs={12} sm={12} md={6}>
 									<h5>ADMINISTRACIÓN WEB</h5>
 									<h1>C.L.A.Po</h1>
-									<p>Bienvenido! Esto es una aplicación web creada con el fin de administrar contenido empresarial. Aquí es posible administrar información en una base de datos como nuevos usuarios o noticias, asi como tambien cargar archivos multimedia a un sistema de archivos en la nube.</p>
+									<p>Bienvenido {user ? user.displayName : ''}! Esto es una aplicación web creada con el fin de administrar contenido empresarial. Aquí es posible controlar información en una base de datos como nuevos usuarios o noticias, asi como tambien subir y compartir ficheros multimedia como fotos o videos a un sistema de archivos en la nube.</p>
 								</Col>
 							</Row>
 						)}/>
@@ -68,7 +68,7 @@ class Main extends React.Component {
 						) : ''}
 					</Container>
 				</div>
-				<Menu user={user} collapsed={collapsed} collapsedMenu={collapsedMenu} />
+				<Menu resize={resize} user={user} collapsed={collapsed} collapsedMenu={collapsedMenu} />
 			</div>
 		);
 	}

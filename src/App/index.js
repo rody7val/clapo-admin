@@ -17,7 +17,9 @@ class App extends Component {
       user: null,
       uploadValue: 0,
       pictures: [],
-      collapsed: true
+      collapsed: true,
+      width: 0,
+      height: 0
     };
 
     // auth
@@ -32,6 +34,7 @@ class App extends Component {
     this.setPictures = this.setPictures.bind(this);
     this.resetPictures = this.resetPictures.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this)
+    this.updateDimensions = this.updateDimensions.bind(this)
 
   }
 
@@ -68,9 +71,22 @@ class App extends Component {
     this.setState({ pictures: [] });
   }
 
+  updateDimensions () {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  }
+
   // Cuando se renderiza App en el DOM
   componentWillMount () {
     this.refresh();
+    this.updateDimensions();
+  }
+
+  componentDidMount () {
+    window.addEventListener("resize", this.updateDimensions);
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener("resize", this.updateDimensions);
   }
 
   // Login
@@ -136,7 +152,7 @@ class App extends Component {
 
     return (
       <div>
-        <div className="App red">
+        <div className="App">
           <Router>
             <div>
               <Header
@@ -146,7 +162,7 @@ class App extends Component {
                 logout={this.handleLogout}
                 className="App-header" />
 
-              <Main user={this.state.user} collapsed={this.state.collapsed} collapsedMenu={this.toggleMenu}/>
+              <Main resize={this.state.width} user={this.state.user} collapsed={this.state.collapsed} collapsedMenu={this.toggleMenu}/>
             </div>
           </Router>
         </div>

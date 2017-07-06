@@ -31,6 +31,9 @@
 	display: block;
 	padding: 0px;
 }
+.title-link{
+	padding: 0px!important;
+}
 
 .left {
 	height: 48px;
