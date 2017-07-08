@@ -1,0 +1,12 @@
+.banner-img{
+	
+}
+input[type='file'] {
+	color: #fff;
+}
+.banner-created{
+	display: flex;
+}
+.banner-created-block{
+	margin-right: 15px;
+}

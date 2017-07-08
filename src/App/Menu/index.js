@@ -31,9 +31,9 @@ class Menu extends React.Component {
 										<img src={menuMovil}/>
 									</span>
 								</button>
-								<Link to='/' className='title-link'>
+								<a href='/' className='title-link'>
 									<img className='title' src={title} alt='title.svg' onClick={collapsedMenu} />
-								</Link>
+								</a>
 							</div>
 							<Nav vertical id='menu-list'>
 								<hr/>

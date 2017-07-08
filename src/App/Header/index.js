@@ -55,11 +55,11 @@ class Header extends React.Component {
 							</button>
 						) : '' }
 
-						<Link to='/' className='title-link'>
+						<a href='/' className='title-link'>
 							<h4 className='title'>
 								<img src={title} alt='title.svg' />
 							</h4>
-						</Link>
+						</a>
 					</div>
 					<div className='right'>
 

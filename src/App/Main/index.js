@@ -1,18 +1,35 @@
 import React from 'react'
 import logo from '../../img/logo.svg'
 import { Route } from 'react-router-dom'
-import { Container, Row, Col, Card, Button, CardHeader, CardFooter, CardBlock,
-  CardTitle, CardText } from 'reactstrap'
+import { Container, Row, Col, Card, Button, CardHeader, CardFooter, CardBlock, CardTitle, CardText } from 'reactstrap'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import '../../css/Main.css'
 
 import Menu from '../Menu'
+import Banners from './Banners'
 
 class Main extends React.Component {
 
 	render() {
-		const { user, collapsed, collapsedMenu, resize } = this.props
+		const { user, resize, collapsed, collapsedMenu } = this.props
+		
+		const WebSite = ({ match }) => (
+			<div>
+				{(() => {
+					switch (match.params.anchor) {
+						case 'banners':
+							return (
+								<Banners anchor={match.params.anchor} user={user}/>
+							)
+						default:
+							return (
+								<p>Se mostrará formulario para modificar el contenido de <b>{match.params.anchor}</b> en el sitio web.</p>
+							)
+					}
+				})()}
+			</div>
+		)
 
 		const Mi = () => (
 			<div>
@@ -43,7 +60,7 @@ class Main extends React.Component {
 		)
 
 		return (
-			<div class>
+			<div>
 				<div id='content-main' className={user && collapsed ? 'in' : ''}>
 					<Container fluid id='main'>
 						<Route exact={true} path='/' render={() => (
@@ -60,10 +77,10 @@ class Main extends React.Component {
 						)}/>
 						{ user ? (
 							<div>
-								<Route path='/site/:anchor' component={WebSite}/>
-								<Route path='/usuarios' component={Users}/>
-								<Route path='/noticias' component={Blog}/>
-								<Route path='/mi' component={Mi} user={user}/>
+								<Route exact={true} path='/site/:anchor' component={WebSite}/>
+								<Route exact={true} path='/usuarios' component={Users}/>
+								<Route exact={true} path='/noticias' component={Blog}/>
+								<Route exact={true} path='/mi' component={Mi} user={user}/>
 							</div>
 						) : ''}
 					</Container>
@@ -73,12 +90,6 @@ class Main extends React.Component {
 		);
 	}
 }
-
-const WebSite = ({ match }) => (
-	<div>
-		Se mostrará formulario para modificar el contenido de <b>{match.params.anchor}</b> en el sitio web.
-	</div>
-)
 
 const Users = ({ match }) => (
 	<div>
@@ -91,6 +102,5 @@ const Blog = ({ match }) => (
 		Se redireccionará al sitio de <b>{match.path}</b> empresarial.
 	</div>
 )
-
 
 export default Main;

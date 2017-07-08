@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import { Progress } from 'reactstrap';
 
 class FileUpload extends Component {
 	render () {
 		return (
 			<div>
-				<progress value={this.props.uploadValue} max='100'>
-					{this.props.uploadValue} %
-				</progress>
+				<div className="text-center">{this.props.uploadValue.toFixed(0)}%</div>
+				<Progress color="info" value={this.props.uploadValue} />
 				<input type='file' onChange={this.props.onUpload}/>
 			</div>
 		);
