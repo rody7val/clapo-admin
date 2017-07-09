@@ -2,6 +2,8 @@
 	
 }
 input[type='file'] {
+	position: relative;
+    max-width: 215px;
 	color: #fff;
 }
 .banner-created{

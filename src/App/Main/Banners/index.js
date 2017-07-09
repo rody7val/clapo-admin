@@ -1,12 +1,13 @@
 import React from 'react'
 import firebase from 'firebase'
 import moment from 'moment-with-locales-es6'
+import ConfirmButton from 'react-confirm-button';
 import { Route, Link} from 'react-router-dom'
 import { Container, Row, Col, Card, Button, CardHeader, CardFooter, CardBlock, CardTitle, CardText, Alert } from 'reactstrap'
-import 'bootstrap/dist/css/bootstrap.css'
-import '../../../css/Banners.css'
 import FileUpload from '../../FileUpload'
 
+import 'bootstrap/dist/css/bootstrap.css'
+import '../../../css/Banners.css'
 
 class Banners extends React.Component {
 	constructor () {
@@ -16,39 +17,14 @@ class Banners extends React.Component {
 			banners: [],
 			uploadValue: 0,
 			modal: false,
-			checked: false,
-			cargando: true,
 			first: 0
 		}
 
 		this.toggle = this.toggle.bind(this);
 
-		this.checked = this.checked.bind(this);
 		this.refresh = this.refresh.bind(this);
-		this.cargando = this.cargando.bind(this);
-		this.noCargando = this.noCargando.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleUpload = this.handleUpload.bind(this);
-	}
-
-	cargando () {
-		this.setState({
-			cargando: true,
-			noCargando: false
-		});
-	}
-
-	noCargando () {
-		this.setState({
-			cargando: false,
-			noCargando: true
-		});
-	}	
-
-	checked () {
-		this.setState({
-			checked: true,
-		});
 	}
 
 	toggle() {
@@ -59,7 +35,7 @@ class Banners extends React.Component {
 
 	// Actualizar estado react
 	refresh () {
-		// refresh files
+		// add new files
 		firebase.database().ref('banners').on('child_added', (snapshot) => {
 			const banner = snapshot.val();
 			banner.key = snapshot.getKey();
@@ -70,6 +46,7 @@ class Banners extends React.Component {
 			});
 		});
 
+		// filter removed file
 		firebase.database().ref('banners').on('child_removed', (snapshot) => {
 			const newBanners = this.state.banners.filter(banner => {
 				return banner.key !== snapshot.getKey();
@@ -81,12 +58,9 @@ class Banners extends React.Component {
 		});
 	}
 
-	// refreshRemoved () {
-	// }
 
 	// Subir imagen
 	handleUpload (event) {
-		this.cargando();
 		// storage
 		const file = event.target.files[0];
 		const storageRef = firebase.storage().ref(`/banners/${file.name}`);
@@ -112,31 +86,28 @@ class Banners extends React.Component {
 			const dbRef = firebase.database().ref('banners');
 			const newPicture = dbRef.push();
 			newPicture.set(record);
-			this.checked();
 		});
   }
 
 
 	// Delete storage and database
 	handleDelete (event) {
-		this.cargando();
 		const currentBanner = JSON.parse(event.target.getAttribute('data'));
 		console.log( currentBanner );
+
 		// storage
 		const storageRef = firebase.storage().ref(`/banners/${currentBanner.name}`);
 		storageRef.delete()
-			.then(() => {
-				// database
-				const dbRef = firebase.database().ref('banners');
-				dbRef.child(currentBanner.key).remove()
-					.then(() => {
-						console.log('Banner Eliminado!');
-						this.checked();
-					})
-					.catch(error => console.log(`Error ${error.code}: ${error.message}`));
-			})
+			.then(() => console.log('Baaner eliminado del Sistema de Archivos (Storage)!'))
 			.catch(error => console.log(`Error ${error.code}: ${error.message}`));
 
+		// database
+		const dbRef = firebase.database().ref('banners');
+		dbRef.child(currentBanner.key).remove()
+			.then(() => {
+				console.log('Banner eliminado de la Base de datos!');
+			})
+			.catch(error => console.log(`Error ${error.code}: ${error.message}`));
 	}
 
 	// Cuando se renderiza App en el DOM
@@ -144,19 +115,14 @@ class Banners extends React.Component {
 		if (this.state.first===0) {
 			this.refresh();
 		}
-		if (this.state.checked) {
-			this.refresh();
-		}
 	}
 
 	componentDidMount () {
-		this.noCargando();
-		this.setState({first: this.state.first++, checked: false});
+		this.setState({first: this.state.first++});
 	}
 
 	render() {
 		const { user, anchor } = this.props
-		// this.refresh()
 
 		return (
 			<div>
@@ -192,14 +158,19 @@ class Banners extends React.Component {
 														</p>
 													</div>
 													<div className='banner-created-block'>
-														<input type='button' value='Eliminar.' data={JSON.stringify(banner)} className='btn btn-sm btn-outline-danger' onClick={this.handleDelete}/>
+														<input
+															type='button'
+															value='Eliminar.'
+															data={JSON.stringify(banner)}
+															className='btn btn-sm btn-outline-danger'
+															onClick={this.handleDelete}/>
 													</div>
 
 												</div>
 												<hr/>
 											</div>
             			  )).reverse() : (
-											<Alert color="info">No hay Banners</Alert>
+											<Alert color="info">Cargando ...</Alert>
             			  )
             			}
 								</Col>
@@ -214,4 +185,3 @@ class Banners extends React.Component {
 }
 
 export default Banners;
-// <Link to={`/site/${anchor}/${banner.key}/${banner.name}/delete`} className='btn btn-outline-danger' >Eliminar</Link>
