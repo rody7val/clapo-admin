@@ -40,7 +40,7 @@ class Main extends React.Component {
 							<Row>
 								<Col md={4}>
 									<CardTitle>
-										<img width='150px' className='img-responsive' src={user.photoURL}/>
+										<img width='150px' className='img-responsive' src={user.photoURL} alt='mi'/>
 									</CardTitle>
 								</Col>
 								<Col md={8}>

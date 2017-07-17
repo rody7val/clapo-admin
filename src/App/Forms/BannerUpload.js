@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Progress } from 'reactstrap';
 
-class FileUpload extends Component {
+class BannerUpload extends Component {
 	render () {
 		return (
 			<div>
@@ -13,4 +13,4 @@ class FileUpload extends Component {
 	}
 }
 
-export default FileUpload;
+export default BannerUpload;

@@ -28,7 +28,7 @@ class Menu extends React.Component {
 									data-toggle="toggle"
 									data-target="#content-menu">
 									<span className='navbar-toggler-icon'>
-										<img src={menuMovil}/>
+										<img src={menuMovil} alt='icon-menu'/>
 									</span>
 								</button>
 								<a href='/' className='title-link'>
@@ -64,7 +64,7 @@ class Menu extends React.Component {
 							</Nav>
 							<div className='menu-footer'>
 								<img width='60px' src={logo} alt='logo.svg'/>
-								<p><small>© 2017 <a className='link-menu-footer' href='https://github.com/rody7val/clapo-admin' target='_blank'>clapo-admin@0.1</a></small></p>
+								<p><small>© 2017 <a className='link-menu-footer' href='https://github.com/rody7val/clapo-admin' target='_blank' rel='noopener noreferrer'>clapo-admin@0.1</a></small></p>
 							</div>
 						</div>
 					</div>

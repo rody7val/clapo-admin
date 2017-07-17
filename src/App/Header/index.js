@@ -1,8 +1,7 @@
 import React from 'react'
-import logo from '../../img/logo.svg'
 import title from '../../img/brand-title.svg'
 import { Link } from 'react-router-dom'
-import { Container, Collapse, Nav, NavItem, NavLink, Navbar, NavbarToggler, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { Container, Navbar, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import '../../css/Header.css'

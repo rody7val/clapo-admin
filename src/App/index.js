@@ -5,7 +5,6 @@ import { BrowserRouter as Router} from 'react-router-dom'
 
 import Header from './Header';
 import Main from './Main';
-import FileUpload from './FileUpload';
 import '../css/App.css';
 
 moment.locale('es');
@@ -82,8 +81,6 @@ class App extends Component {
 
   // App
   render() {
-    const { user } = this.props
-
     return (
       <div>
         <div className="App">
